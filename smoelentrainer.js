@@ -50,41 +50,44 @@ var pictures = [{
 ];
 var selectedimg;
 var selectedName;
+function makeButtonsClickable(elements) {
+  elements.forEach(element => {
+      console.log(element.id);
+      element.onclick = function() {
+        selectedName = document.getElementById(element.id);
+        console.log(selectedName);
+        checkClicked();
+      }
+  })
+}
+
 const buttons = document.querySelectorAll('.button');
-buttons.forEach(element => {
-    console.log(element.id);
-    element.onclick = function() {
-      selectedimg = document.getElementById(element.id);
-      console.log(selectedimg);
-      checkClicked();
-    };
-
-});
+makeButtonsClickable(buttons);
 const buttons1 = document.querySelectorAll('.button-1');
-buttons1.forEach(element => {
-  console.log("jo mensen");
-    console.log(element.id);
-    element.onclick = function() {
-      selectedName = document.getElementById(element.id);
-      console.log(selectedName);
-      checkClicked();
-    };
+makeButtonsClickable(buttons1);
 
-});
+
 
 
 function checkClicked(){
   if (selectedimg != undefined || selectedimg != "" || selectedName != undefined || selectedName != "") {
+      // verglijk slectedName met name selectedimg
+
   console.log(selectedimg, selectedName);
   console.log("slebba");
   }
 }
 
-const name = document.querySelectorAll('.button-1');
-name.forEach(element => {
-    console.log(element.id);
-    element.onclick = function() { compare(element.id); };
-});
+
+
+
+
+
+// const name = document.querySelectorAll('.button-1');
+// name.forEach(element => {
+//     console.log(element.id);
+//     element.onclick = function() { compare(element.id); };
+// });
 
 
 
