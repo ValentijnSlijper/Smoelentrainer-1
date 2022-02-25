@@ -52,10 +52,10 @@ var selectedimg;
 var selectedName;
 function makeButtonsClickable(elements) {
   elements.forEach(element => {
-      console.log(element.id);
+      // console.log(element.id);
       element.onclick = function() {
         selectedName = document.getElementById(element.id);
-        console.log(selectedName);
+        // console.log(selectedName);
         checkClicked();
       }
   })
@@ -63,6 +63,8 @@ function makeButtonsClickable(elements) {
 
 const buttons = document.querySelectorAll('.button');
 makeButtonsClickable(buttons);
+// console.log("buttons");
+// console.log(buttons);
 const buttons1 = document.querySelectorAll('.button-1');
 makeButtonsClickable(buttons1);
 
@@ -73,8 +75,14 @@ function checkClicked(){
   if (selectedimg != undefined || selectedimg != "" || selectedName != undefined || selectedName != "") {
       // verglijk slectedName met name selectedimg
 
-  console.log(selectedimg, selectedName);
-  console.log("slebba");
+  var removeClass = document.getElementsByClassName("selected");
+  console.log(removeClass);
+  for (var i = 0; i < removeClass.length; i++) {
+      removeClass[i].classList.remove("selected");
+  }
+  document.getElementById(selectedName.id).classList.add("selected");
+  document.getElementById(selectedimg.id).classList.add("selected");
+  // console.log("slebba");
   }
 }
 
@@ -97,7 +105,7 @@ var checkImg;
 
 for (var i = 0; i < pictures.length; i++) {
   var randomNum = numbers[Math.floor(Math.random() * numbers.length)];
-  console.log(randomNum);
+  // console.log(randomNum);
   var numbercheck = numbers.indexOf(randomNum);
   numbers.splice(numbercheck,1);
   document.getElementById('img-'+i).src = pictures[randomNum].picture;

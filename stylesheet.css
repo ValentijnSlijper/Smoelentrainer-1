@@ -8,3 +8,7 @@
 #names{
   background-color: blue;
 }
+.selected{
+  border-style: solid;
+  border-color: #000000;
+}
