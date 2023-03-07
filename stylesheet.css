@@ -8,7 +8,15 @@
 #names{
   background-color: blue;
 }
+a {
+  color: white;
+  font-weight: bold;
+}
 .selected{
   border-style: solid;
   border-color: #000000;
+}
+.selected1{
+  border-style: solid;
+  border-color: red;
 }

@@ -12,11 +12,11 @@ var pictures = [{
 	},
 	{
 	name: "Dušan Tadić",
-	picture: "img/DušanTadić.jpg"
+	picture: "img/DusanTadic.jpg"
 	},
 	{
 	name: "Hassane Bandé",
-	picture: "img/HassaneBandé.jpg"
+	picture: "img/HassaneBande.jpg"
 	},
 	{
 	name: "Issam el Maach",
@@ -28,11 +28,11 @@ var pictures = [{
 	},
 	{
 	name: "Nicolás Tagliafico",
-	picture: "img/NicolásTagliafico.jpg"
+	picture: "img/NicolasTagliafico.jpg"
 	},
 	{
-	name: "Nkol Ngok",
-	picture: "img/NkolNgok.jpg"
+	name: "André Onana",
+	picture: "img/AndreOnana.jpg"
 	},
 	{
 	name: "Noussair Mazraoui",
@@ -50,25 +50,33 @@ var pictures = [{
 ];
 var selectedimg;
 var selectedName;
+var score = 0;
 function makeButtonsClickable(elements) {
 	elements.forEach(element => {
+
+
 			// console.log(element.id);
 			element.onclick = function() {
-				selectedName = document.getElementById(element.id);
-				selectedimg = document.getElementById(element.id);
+				//check if clicked element is a button or an image
+					if (element.id.includes("btn")){
+						selectedName = document.getElementById(element.id);
+						selectNAME(element.id);
+					}
+					if (element.id.includes("img") ){
+								selectedimg = document.getElementById(element.id);
+								selectIMG(element.id);
+					}
+					if (selectedimg != undefined && selectedName != undefined) {
+						checkMatch();
+					}
 				// console.log(selectedName);
 				// checkClicked();
-				selectNAME(element.id);
-				selectIMG(element.id);
-
 			}
 	})
 }
 
 const buttons = document.querySelectorAll('.button');
 makeButtonsClickable(buttons);
-// console.log("buttons");
-// console.log(buttons);
 const buttons1 = document.querySelectorAll('.button-1');
 makeButtonsClickable(buttons1);
 
@@ -77,43 +85,75 @@ makeButtonsClickable(buttons1);
 
 
 function selectIMG(id){
-
-	if (id.includes("img") ){
+		//set a border on last selected image and remove all other selected elements
+	  const allElements = document.querySelectorAll('selected');
+	  allElements.forEach((element) => {
+	  		element.classList.remove('selected');
+	 	});
 		console.log("IMG " + id);
 
-		var removeClass = document.getElementsByClassName("selected");
-			for (var i = 0; i < removeClass.length; i++) {
-				console.log(removeClass[i].parentElement.id);
-				if (removeClass[i].parentElement.id == "images") {
-					removeClass[i].classList.remove("selected");
-				}
-			}
-	}
-	document.getElementById(selectedimg.id).classList.add("selected");
+		document.getElementById(selectedimg.id).classList.add("selected");
 
+}
 
-
-
-		if (id.includes("btn")){
+	function selectNAME(id){
+			//set a border on last selected name and remove all other selected elements
+			const allElements = document.querySelectorAll('selected1');
+		  allElements.forEach((element) => {
+				  element.classList.remove('selected1');
+		  });
 			console.log("name " + id);
+			document.getElementById(selectedName.id).classList.add("selected1");
 
-			var removeClass = document.getElementsByClassName("selected");
-				for (var i = 0; i < removeClass.length; i++) {
-					console.log(removeClass[i].parentElement.id);
-					if (removeClass[i].parentElement.id == "names") {
-						removeClass[i].classList.remove("selected");
-					}
+	}
+
+
+
+	//check if images and name match
+	function checkMatch(){
+			console.log("reamoved654161");
+			var selectedNoMatch;
+			// tries++;
+			// document.getElementById("triesCounter").innerHTML = tries;
+			// resetAnimation();
+
+			// Loops through the array to check if there is a match
+			var url = selectedimg.src;
+
+			//removes the base https://localhost part from the image url
+			url = url.replace( /^[a-zA-Z]{3,5}\:\/{2}[a-zA-Z0-9_.:-]+\//, '' );
+			console.log('selected'+selectedName.innerHTML, url);
+			//loops trough picture array and checks if selected image and name are the same as an index in the array
+			for (var i = 0; i < pictures.length; i++) {
+				selectedNoMatch = false;
+				if(pictures[i].name == selectedName.innerHTML && pictures[i].picture == url){
+					console.log("reamoved");
+					document.getElementById(selectedName.id).style.opacity = "0";
+					document.getElementById(selectedName.id).style.transition = "0.5s";
+					document.getElementById(selectedName.id).onclick = null;
+
+					document.getElementById(selectedimg.id).style.opacity = "0";
+					document.getElementById(selectedimg.id).style.transition = "0.5s";
+					document.getElementById(selectedimg.id).onclick = null;
+					selectedName = undefined;
+					selectedimg = undefined;
+					score++;
+					// addCorrectPlayers(selectedNameid);
+
+					//update score counter in HTML
+					document.getElementById("scoreCounter").innerHTML = score;
+							if(score == pictures.length){
+								// gameEnding();
+								console.log("######## GAME OVER #########");
+							}
+					return;
+				}
+				//check in selected match is true or false
+				else if(pictures[i].name != selectedName || pictures[i].picture != selectedimg){
+					selectedNoMatch = true;
 				}
 		}
-		document.getElementById(selectedName.id).classList.add("selected");
-
-}
-function selectNAME(id){
-
-}
-
-
-
+	}
 // function checkClicked(){
 //   if (selectedimg != undefined || selectedimg != "" || selectedName != undefined || selectedName != "") {
 //       // verglijk slectedName met name selectedimg
@@ -128,7 +168,7 @@ function selectNAME(id){
 //   // console.log("slebba");
 //   }
 // }
-
+//
 
 
 
