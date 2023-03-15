@@ -20,3 +20,18 @@ a {
   border-style: solid;
   border-color: red;
 }
+#scoreCounter{
+  padding: 0 10px;
+  color: blue;
+  font-weight: bold;
+}
+#scoreCounterGuesses{
+  padding: 0 10px;
+  color: blue;
+  font-weight: bold;
+}
+
+.score{
+    font-size: 20px;
+  display: flex;
+}

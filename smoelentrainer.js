@@ -51,10 +51,10 @@ var pictures = [{
 var selectedimg;
 var selectedName;
 var score = 0;
+var scoreGuesses = 0;
+
 function makeButtonsClickable(elements) {
 	elements.forEach(element => {
-
-
 			// console.log(element.id);
 			element.onclick = function() {
 				//check if clicked element is a button or an image
@@ -65,6 +65,7 @@ function makeButtonsClickable(elements) {
 					if (element.id.includes("img") ){
 								selectedimg = document.getElementById(element.id);
 								selectIMG(element.id);
+
 					}
 					if (selectedimg != undefined && selectedName != undefined) {
 						checkMatch();
@@ -85,12 +86,23 @@ makeButtonsClickable(buttons1);
 
 
 function selectIMG(id){
+	console.log('testselect');
 		//set a border on last selected image and remove all other selected elements
-	  const allElements = document.querySelectorAll('selected');
-	  allElements.forEach((element) => {
-	  		element.classList.remove('selected');
-	 	});
+
+			let get = Array.from(document.getElementsByClassName('selected'));
+			get.forEach(element => {
+ 			element.classList.remove("selected");
+		});
+
+	  // const allElements = document.querySelectorAll('selected');
+		//
+		// console.log(allElements);
+	  // allElements.forEach((element) => {
+	  // 		element.classList.remove('selected');
+		// 		console.log('hallo' + allElements);
+	 	// });
 		console.log("IMG " + id);
+
 
 		document.getElementById(selectedimg.id).classList.add("selected");
 
@@ -98,10 +110,16 @@ function selectIMG(id){
 
 	function selectNAME(id){
 			//set a border on last selected name and remove all other selected elements
-			const allElements = document.querySelectorAll('selected1');
-		  allElements.forEach((element) => {
-				  element.classList.remove('selected1');
-		  });
+
+			let get = Array.from(document.getElementsByClassName('selected1'));
+			get.forEach(element => {
+ 			element.classList.remove("selected1");
+		});
+
+			// const allElements = document.querySelectorAll('selected1');
+		  // allElements.forEach((element) => {
+			// 	  element.classList.remove('selected1');
+		  // });
 			console.log("name " + id);
 			document.getElementById(selectedName.id).classList.add("selected1");
 
@@ -111,6 +129,10 @@ function selectIMG(id){
 
 	//check if images and name match
 	function checkMatch(){
+			scoreGuesses ++;
+			//update guess coutner
+			document.getElementById("scoreCounterGuesses").innerHTML = scoreGuesses;
+
 			console.log("reamoved654161");
 			var selectedNoMatch;
 			// tries++;
@@ -139,11 +161,10 @@ function selectIMG(id){
 					selectedimg = undefined;
 					score++;
 					// addCorrectPlayers(selectedNameid);
-
 					//update score counter in HTML
 					document.getElementById("scoreCounter").innerHTML = score;
 							if(score == pictures.length){
-								// gameEnding();
+								// gameEnding(); nog toevoefen
 								console.log("######## GAME OVER #########");
 							}
 					return;
